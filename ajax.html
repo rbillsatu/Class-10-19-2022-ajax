@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Ryan Bills">
+    <title>Ajax</title>
+</head>
+<body>
+    <button id="Country Load Button" onclick="showCountries()">
+    Load Country on Click!
+    </button>
+    <br>
+    
+    <script>
+        function showCountries(){
+
+            let flag = document.createElement('img')
+            let country = document.createElement('p') /*using a p tag*/
+            
+            document.body.append(country)
+            document.body.appendChild(flag)
+
+            let url = "https://restcountries.com/v2/all"
+            console.log("Let's GO!!")
+
+            fetch(url)
+                .then(response =>{
+                return response.json()  /*This is a shorter way by just building the function here instead of calling a function.*/
+                .then(json =>{ /*This is what you are doing*/
+                    let a = 37;  /*used a to change multiple items at once*/
+                    country.innerHTML = json[a].name
+                    flag.src = json[a].flag
+                    console.log("Flag and Country Name Added!")
+                })
+                .catch(err=>{
+                    console.log('Errors:' + err.message)
+                })
+            })
+
+        }
+    </script>
+
+</body>
+</html>
